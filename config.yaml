@@ -1,0 +1,70 @@
+data:
+  path: data/mh_10m_sample_1m.parquet
+  format: auto
+
+  item_cols:
+    - pcl1_rep
+    - pcl2_rep
+    - pcl3_rep
+    - pcl4_rep
+    - pcl5_rep
+    - pcl6_rep
+    - pcl7_rep
+    - pcl8_rep
+    - pcl9_rep
+    - pcl10_rep
+    - pcl11_rep
+    - pcl12_rep
+    - pcl13_rep
+    - pcl14_rep
+    - pcl15_rep
+    - pcl16_rep
+    - pcl17_rep
+    - pcl18_rep
+    - pcl19_rep
+    - pcl20_rep
+
+  # A/B/C DIF groups
+  group_cols:
+    - gender
+    - age_group
+    - site_id
+
+  # Your PCL values are 0–4; -1 is missing and will be auto-cleaned in run.py
+  allowed_values: [0, 1, 2, 3, 4]
+
+run:
+  outdir: outputs
+  tag: pcl_colab_run
+
+modules:
+  quality: true
+  reliability: true
+  dif_screen: true
+  irt: true
+  uncertainty: true
+
+rules:
+  min_n_per_group: 200
+
+# IRT (Bayesian GRM) settings: start moderate, scale later
+irt:
+  max_rows: 20000
+  draws: 250
+  tune: 250
+  chains: 2
+  target_accept: 0.9
+  seed: 42
+
+bootstrap:
+  alpha:
+    enabled: true
+    n_boot: 200
+    seed: 42
+
+  dif_stability:
+    enabled: true
+    n_boot: 20
+    seed: 123
+    q_threshold: 0.05
+
