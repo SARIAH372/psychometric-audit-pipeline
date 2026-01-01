@@ -30,7 +30,7 @@ data:
     - age_group
     - site_id
 
-  # Your PCL values are 0–4; -1 is missing and will be auto-cleaned in run.py
+  # My PCL values are 0–4; -1 is missing and will be auto-cleaned in run.py
   allowed_values: [0, 1, 2, 3, 4]
 
 run:
@@ -67,4 +67,5 @@ bootstrap:
     n_boot: 20
     seed: 123
     q_threshold: 0.05
+
 
